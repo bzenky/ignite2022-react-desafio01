@@ -31,7 +31,7 @@
         }
     }
 
-    .taskList {
+    .emptyTaskList {
         padding: 64px 24px;
         border-top: 1px solid var(--gray-400);
         border-radius: 8px;
@@ -50,6 +50,92 @@
                 color: var(--gray-300);
                 text-align: center;
                 line-height: 1.4;
+            }
+        }
+    }
+
+    .taskItem {
+        display: flex;
+        width: 100%;
+        padding: 16px;
+        background-color: var(--gray-500);
+        border: 1px solid var(--gray-400);
+        border-radius: 8px;
+        gap: 12px;
+
+        &+.taskItem {
+            margin-top: 12px;
+        }
+
+        .taskHandle {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+
+            &:hover .radioTask {
+                border-color: var(--blue-dark);
+            }
+
+            &:hover .radioTask.done {
+                border-color: var(--purple);
+                background-color: var(--purple);
+            }
+
+            &.done {
+                .radioTask {
+                    border-color: var(--purple-dark);
+                    background-color: var(--purple-dark);
+                    background-image: url('../../../assets/icon-ok.svg');
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                }
+
+                .taskContent {
+                    text-decoration: line-through;
+                    color: var(--gray-300);
+                }
+            }
+
+            .radioTask {
+                width: 18px;
+                height: 18px;
+                background-color: transparent;
+                border: 2px solid var(--blue);
+                border-radius: 50%;
+
+                transition: border-color 0.2s, background-color 0.2s;
+            }
+
+            .taskContent {
+                max-width: 95%;
+                line-break: anywhere;
+                color: var(--gray-100);
+
+                transition: color 0.2s;
+            }
+        }
+
+        .deleteBtn {
+            width: 24px;
+            height: 24px;
+            margin-left: auto;
+            background: transparent;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+
+            svg path {
+                transition: fill 0.2s;
+            }
+
+            &:hover {
+                background-color: var(--gray-400);
+
+                svg path {
+                    fill: var(--red-danger);
+                }
             }
         }
     }
