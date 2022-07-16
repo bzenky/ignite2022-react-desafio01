@@ -61,7 +61,6 @@
         background-color: var(--gray-500);
         border: 1px solid var(--gray-400);
         border-radius: 8px;
-        gap: 12px;
 
         &+.taskItem {
             margin-top: 12px;
@@ -69,9 +68,14 @@
 
         .taskHandle {
             display: flex;
+            flex: 1;
             align-items: center;
             gap: 16px;
             cursor: pointer;
+
+            @media screen and (max-width: 425px) {
+                gap: 12px;
+            }
 
             &:hover .radioTask {
                 border-color: var(--blue-dark);
@@ -108,11 +112,16 @@
             }
 
             .taskContent {
-                max-width: 95%;
+                max-width: 94%;
                 line-break: anywhere;
                 color: var(--gray-100);
+                font-size: 0.875rem;
 
                 transition: color 0.2s;
+
+                @media screen and (max-width: 425px) {
+                    max-width: 88%;
+                }
             }
         }
 
