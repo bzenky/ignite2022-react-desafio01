@@ -3,8 +3,8 @@ import styles from './TaskList.module.scss'
 import clipboardImg from '../../../assets/clipboard.png'
 
 interface Task {
-    content: string
     id: string
+    content: string
     isTaskDone: boolean
 }
 interface TaskListProps {
@@ -14,7 +14,6 @@ interface TaskListProps {
 }
 
 export function TaskList({ taskList, handleTaskDone, handleRemoveTask }: TaskListProps) {
-
     return (
         <div className={styles.taskWrapper}>
             <div className={styles.taskHeader}>

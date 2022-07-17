@@ -1,8 +1,10 @@
 import { FormEvent, useState } from 'react'
-import styles from './Task.module.scss'
 
 import { TaskAdd } from "./TaskAdd"
 import { TaskList } from "./TaskList"
+import { errorDuplicateMessage, errorEmptyMessage, successMessage, Toasty } from '../Toasty'
+
+import styles from './Task.module.scss'
 
 interface Task {
     id: string
@@ -21,7 +23,13 @@ export function Task() {
 
         if (newTask.content.trim() !== '' && verifyContentExists.length === 0) {
             setTaskList([...taskList, newTask])
+            successMessage()
+        } else if (newTask.content.trim() === '') {
+            errorEmptyMessage()
+        } else if (verifyContentExists.length !== 0) {
+            errorDuplicateMessage()
         }
+
         setNewTask({ content: '', id: '', isTaskDone: false })
     }
 
@@ -53,6 +61,8 @@ export function Task() {
                 handleTaskDone={handleTaskDone}
                 handleRemoveTask={handleRemoveTask}
             />
+
+            <Toasty />
         </main>
     )
 }
