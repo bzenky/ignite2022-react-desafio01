@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 
 import { TaskAdd } from "./TaskAdd"
 import { TaskList } from "./TaskList"
@@ -13,9 +13,13 @@ interface Task {
 }
 
 export function Task() {
-    const [taskList, setTaskList] = useState<Task[]>([]);
+    const [taskList, setTaskList] = useState<Task[]>(JSON.parse(window.localStorage.getItem('taskList') || '[]'));
     const [newTask, setNewTask] = useState<Task>({ content: '', id: '', isTaskDone: false });
     const id = String(new Date().getTime())
+
+    useEffect(() => {
+        window.localStorage.setItem('taskList', JSON.stringify(taskList))
+    }, [taskList])
 
     function handleAddTask(event: FormEvent) {
         event.preventDefault()

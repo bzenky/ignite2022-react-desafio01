@@ -16,7 +16,7 @@ interface TaskAddProps {
 
 export function TaskAdd({ handleAddTask, onInputChange, newTask }: TaskAddProps) {
     return (
-        <div className={styles.taskAddWrapper}>
+        <div className={styles.taskAddWrapper} onSubmit={handleAddTask}>
             <form className={styles.newTaskForm}>
                 <input
                     type="text"
@@ -28,7 +28,6 @@ export function TaskAdd({ handleAddTask, onInputChange, newTask }: TaskAddProps)
                 <button
                     className={styles.taskCreateButton}
                     title="Botão para adicionar uma nova tarefa"
-                    onClick={handleAddTask}
                 >
                     Criar
                     <img src={addIcon} alt="Ícone de adicionar" />
