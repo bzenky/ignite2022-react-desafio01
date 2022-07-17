@@ -78,15 +78,16 @@
             }
 
             &:hover .radioTask {
+                background-color: var(--blue-task-radio);
                 border-color: var(--blue-dark);
             }
 
-            &:hover .radioTask.done {
-                border-color: var(--purple);
-                background-color: var(--purple);
-            }
-
             &.done {
+                &:hover .radioTask {
+                    border-color: var(--purple);
+                    background-color: var(--purple);
+                }
+
                 .radioTask {
                     border-color: var(--purple-dark);
                     background-color: var(--purple-dark);
