@@ -21,6 +21,9 @@ A aplicação é um Todo List com as seguintes funcionalidades:
 - ViteJs
 - Typescript
 
+## Milha Extra
+- Toast
+
 ## Rodando
 
 Clonar o repositório e rodar o comando
