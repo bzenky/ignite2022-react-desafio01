@@ -23,6 +23,7 @@ A aplicação é um Todo List com as seguintes funcionalidades:
 
 ## Milha Extra
 - Toast
+- LocalStorage
 
 ## Rodando
 
