@@ -1,5 +1,5 @@
 <div align=center>
-  <img src="https://i.imgur.com/cVAsZfL.png" alt="Logo Next Level Week Return" width="500px">
+  <img src="https://i.imgur.com/cVAsZfL.png" alt="Logo Next Level Week Return" width="200px">
 </div>
 
 #
