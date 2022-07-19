@@ -2,7 +2,12 @@ import { FormEvent, useEffect, useState } from 'react'
 
 import { TaskAdd } from "./TaskAdd"
 import { TaskList } from "./TaskList"
-import { errorDuplicateMessage, errorEmptyMessage, successMessage, Toasty } from '../Toasty'
+import {
+    errorDuplicateMessage,
+    errorEmptyMessage,
+    successMessage,
+    Toasty
+} from '../Toasty'
 
 import styles from './Task.module.scss'
 
@@ -23,7 +28,7 @@ export function Task() {
 
     function handleAddTask(event: FormEvent) {
         event.preventDefault()
-        const verifyContentExists = taskList.filter(task => task.content === newTask.content)
+        const verifyContentExists = taskList.filter(task => task.content.trim() === newTask.content.trim())
 
         if (newTask.content.trim() !== '' && verifyContentExists.length === 0) {
             setTaskList([...taskList, newTask])
