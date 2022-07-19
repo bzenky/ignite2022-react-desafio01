@@ -5,7 +5,8 @@ import { TaskList } from "./TaskList"
 import {
     errorDuplicateMessage,
     errorEmptyMessage,
-    successMessage,
+    successAddMessage,
+    successRemoveMessage,
     Toasty
 } from '../Toasty'
 
@@ -32,7 +33,7 @@ export function Task() {
 
         if (newTask.content.trim() !== '' && verifyContentExists.length === 0) {
             setTaskList([...taskList, newTask])
-            successMessage()
+            successAddMessage()
         } else if (newTask.content.trim() === '') {
             errorEmptyMessage()
         } else if (verifyContentExists.length !== 0) {
@@ -54,6 +55,7 @@ export function Task() {
     function handleRemoveTask(id: string) {
         const taskListUpdated = taskList.filter(task => task.id !== id)
 
+        successRemoveMessage()
         setTaskList(taskListUpdated)
     }
 
