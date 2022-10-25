@@ -4,14 +4,10 @@ import styles from './TaskAdd.module.scss'
 
 import addIcon from '../../../assets/icon-add.svg'
 
-interface Task {
-    id: string
-    content: string
-}
 interface TaskAddProps {
     handleAddTask: (event: FormEvent) => void
     onInputChange: (content: string) => void
-    newTask: Task
+    newTask: string
 }
 
 export function TaskAdd({ handleAddTask, onInputChange, newTask }: TaskAddProps) {
@@ -23,11 +19,11 @@ export function TaskAdd({ handleAddTask, onInputChange, newTask }: TaskAddProps)
                     placeholder="Adicione uma nova tarefa"
                     className={styles.taskInput}
                     onChange={(event) => onInputChange(event.target.value)}
-                    value={newTask.content}
+                    value={newTask}
                 />
                 <button
                     className={styles.taskCreateButton}
-                    title="Botão para adicionar uma nova tarefa"
+                    title="Adicione uma nova tarefa"
                 >
                     Criar
                     <img src={addIcon} alt="Ícone de adicionar" />

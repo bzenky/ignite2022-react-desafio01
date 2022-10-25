@@ -1,11 +1,11 @@
 import styles from './TaskList.module.scss'
-
 import clipboardImg from '../../../assets/clipboard.png'
 
 interface Task {
     id: string
     content: string
     isTaskDone: boolean
+    createdAt: string
 }
 interface TaskListProps {
     taskList: Task[]
@@ -14,6 +14,7 @@ interface TaskListProps {
 }
 
 export function TaskList({ taskList, handleTaskDone, handleRemoveTask }: TaskListProps) {
+
     return (
         <div className={styles.taskWrapper}>
             <div className={styles.taskHeader}>
@@ -42,11 +43,11 @@ export function TaskList({ taskList, handleTaskDone, handleRemoveTask }: TaskLis
                     taskList.map(task => {
                         return (
                             <div className={styles.taskItem} key={task.id}>
-                                <div className={`${styles.taskHandle} ${task.isTaskDone && styles.done}`} onClick={() => handleTaskDone(task.id)}>
+                                <div className={`${styles.taskHandle} ${task.isTaskDone && styles.done}`} onClick={() => handleTaskDone(task.id)} title={`Tarefa criada em ${task.createdAt}`} >
                                     <span className={styles.radioTask}></span>
                                     <span className={styles.taskContent}>{task.content}</span>
                                 </div>
-                                <button className={styles.deleteBtn} onClick={() => handleRemoveTask(task.id)}>
+                                <button className={styles.deleteBtn} onClick={() => handleRemoveTask(task.id)} title='Remover tarefa'>
                                     <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.20214 4.98547H6.87158V10.5073H8.20214V4.98547Z" fill="#808080" />
                                         <path d="M5.46239 4.98547H4.13184V10.5073H5.46239V4.98547Z" fill="#808080" />

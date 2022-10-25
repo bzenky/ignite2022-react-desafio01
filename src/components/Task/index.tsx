@@ -11,16 +11,18 @@ import {
 } from '../Toasty'
 
 import styles from './Task.module.scss'
+import { dateFormatter } from '../../utils/formatter'
 
 interface Task {
     id: string
     content: string
     isTaskDone: boolean
+    createdAt: string
 }
 
 export function Task() {
     const [taskList, setTaskList] = useState<Task[]>(JSON.parse(window.localStorage.getItem('taskList') || '[]'));
-    const [newTask, setNewTask] = useState<Task>({ content: '', id: '', isTaskDone: false });
+    const [newTask, setNewTask] = useState('');
     const id = String(new Date().getTime())
 
     useEffect(() => {
@@ -29,22 +31,23 @@ export function Task() {
 
     function handleAddTask(event: FormEvent) {
         event.preventDefault()
-        const verifyContentExists = taskList.filter(task => task.content.trim() === newTask.content.trim())
+        const date = dateFormatter.format(new Date())
+        const verifyContentExists = taskList.filter(task => task.content.trim() === newTask.trim())
 
-        if (newTask.content.trim() !== '' && verifyContentExists.length === 0) {
-            setTaskList([...taskList, newTask])
+        if (newTask.trim() !== '' && verifyContentExists.length === 0) {
+            setTaskList([...taskList, { id, content: newTask, isTaskDone: false, createdAt: date }])
             successAddMessage()
-        } else if (newTask.content.trim() === '') {
+        } else if (newTask.trim() === '') {
             errorEmptyMessage()
         } else if (verifyContentExists.length !== 0) {
             errorDuplicateMessage()
         }
 
-        setNewTask({ content: '', id: '', isTaskDone: false })
+        setNewTask('')
     }
 
     function inputEventValue(value: string) {
-        setNewTask({ content: value, id: id, isTaskDone: false })
+        setNewTask(value)
     }
 
     function handleTaskDone(id: string) {
