@@ -1,19 +1,11 @@
-import styles from './TaskList.module.scss'
+import { useContext } from 'react'
+import { ToDoContext } from '../../../contexts/ToDoContext'
+
 import clipboardImg from '../../../assets/clipboard.png'
+import styles from './TaskList.module.scss'
 
-interface Task {
-    id: string
-    content: string
-    isTaskDone: boolean
-    createdAt: string
-}
-interface TaskListProps {
-    taskList: Task[]
-    handleTaskDone: (id: string) => void
-    handleRemoveTask: (id: string) => void
-}
-
-export function TaskList({ taskList, handleTaskDone, handleRemoveTask }: TaskListProps) {
+export function TaskList() {
+    const { taskList, handleRemoveTask, handleTaskDone } = useContext(ToDoContext)
 
     return (
         <div className={styles.taskWrapper}>

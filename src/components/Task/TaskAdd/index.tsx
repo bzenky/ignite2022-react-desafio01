@@ -1,16 +1,16 @@
-import { FormEvent } from 'react'
+import { useContext } from 'react'
+import { ToDoContext } from '../../../contexts/ToDoContext'
 
 import styles from './TaskAdd.module.scss'
-
 import addIcon from '../../../assets/icon-add.svg'
 
-interface TaskAddProps {
-    handleAddTask: (event: FormEvent) => void
-    onInputChange: (content: string) => void
-    newTask: string
-}
+export function TaskAdd() {
+    const {
+        handleNewTaskInput,
+        handleAddTask,
+        newTask
+    } = useContext(ToDoContext)
 
-export function TaskAdd({ handleAddTask, onInputChange, newTask }: TaskAddProps) {
     return (
         <div className={styles.taskAddWrapper} onSubmit={handleAddTask}>
             <form className={styles.newTaskForm}>
@@ -18,7 +18,7 @@ export function TaskAdd({ handleAddTask, onInputChange, newTask }: TaskAddProps)
                     type="text"
                     placeholder="Adicione uma nova tarefa"
                     className={styles.taskInput}
-                    onChange={(event) => onInputChange(event.target.value)}
+                    onChange={(event) => handleNewTaskInput(event.target.value)}
                     value={newTask}
                 />
                 <button
