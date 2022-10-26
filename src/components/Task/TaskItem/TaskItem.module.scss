@@ -80,15 +80,24 @@
     cursor: pointer;
     transition: background-color 0.2s;
 
-    svg path {
-      transition: fill 0.2s;
+    svg {
+      height: 20px;
+
+      path,
+      line {
+        transition: fill 0.2s;
+      }
     }
 
     &:hover {
       background-color: var(--gray-400);
 
-      svg path {
-        fill: var(--red-danger);
+      svg {
+
+        path,
+        line {
+          stroke: var(--red-danger);
+        }
       }
     }
   }
