@@ -73,10 +73,13 @@
   .controls {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
 
     .editBtn,
     .deleteBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 24px;
       height: 24px;
       margin-left: auto;
@@ -85,6 +88,11 @@
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.2s;
+
+      &:focus {
+        outline: 2px solid var(--purple);
+        outline-offset: 1px;
+      }
 
       svg {
         height: 20px;

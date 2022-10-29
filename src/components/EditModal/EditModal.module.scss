@@ -12,7 +12,7 @@
   transform: translate(-50%, -50%);
 
   max-width: 400px;
-  width: 96%;
+  width: 94%;
   padding: 24px;
   background: var(--gray-500);
   border-radius: 6px;
@@ -21,6 +21,7 @@
     color: var(--purple);
     font-size: 1.5rem;
     font-weight: 700;
+    text-align: center;
   }
 
   .form {
@@ -43,14 +44,15 @@
         color: var(--gray-100);
         background: var(--gray-400);
         border: none;
-        border-radius: 2px;
+        border-radius: 4px;
 
         &:disabled {
           opacity: 0.6;
         }
 
         &:focus {
-          outline: 1px solid var(--purple-dark)
+          outline: 2px solid var(--purple-dark);
+          outline-offset: 2px;
         }
       }
     }
@@ -69,6 +71,11 @@
         color: var(--gray-100);
         transition: background 0.2s ease-out;
         font-weight: 500;
+
+        &:focus {
+          outline: 2px solid var(--purple-dark);
+          outline-offset: 2px;
+        }
 
         &.cancel {
           background: var(--red-danger);

@@ -33,7 +33,7 @@ export function TaskItem({ task }: TaskItemProps) {
 
       <div className={styles.controls}>
         <Dialog.Trigger asChild>
-          <button className={styles.editBtn} onClick={setItemIdStorage}>
+          <button className={styles.editBtn} onClick={setItemIdStorage} title='Editar tarefa'>
             <Pencil width={20} color='#808080' />
           </button>
         </Dialog.Trigger>
