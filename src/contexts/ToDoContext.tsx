@@ -9,7 +9,6 @@ import {
   errorDuplicateMessage,
   errorEmptyMessage,
   successAddMessage,
-  successEditMessage,
   successRemoveMessage
 } from "../components/Toasty";
 import { dateFormatter } from "../utils/formatter";
@@ -19,7 +18,7 @@ interface ToDoContextProviderProps {
 }
 
 interface ToDoContextProps {
-  handleAddTask: (event: FormEvent) => void
+  handleAddTask: () => void
   handleNewTaskInput: (value: string) => void
   handleUpdateTaskInput: (value: string) => void
   handleUpdateTaskList: (updatedTasklist: Task[]) => void
@@ -49,8 +48,8 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
     window.localStorage.setItem('taskList', JSON.stringify(taskList))
   }, [taskList])
 
-  function handleAddTask(event: FormEvent) {
-    event.preventDefault()
+  function handleAddTask() {
+    event!.preventDefault()
     const date = dateFormatter.format(new Date())
     const verifyContentExists = taskList.filter(task => task.content.trim() === newTask.trim())
 

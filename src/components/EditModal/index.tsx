@@ -2,28 +2,29 @@ import { useContext } from 'react'
 import { ToDoContext } from '../../contexts/ToDoContext'
 import * as Dialog from '@radix-ui/react-dialog'
 import styles from './EditModal.module.scss'
-import { errorDuplicateMessage, errorEmptyEditMessage, errorEmptyMessage, successEditMessage } from '../Toasty'
+import { errorDuplicateMessage, errorEmptyEditMessage, successEditMessage } from '../Toasty'
 
 interface EditModalProps {
-  description: string
-  taskId: string
   handleModal: () => void
 }
 
-export function EditModal({ description, taskId, handleModal }: EditModalProps) {
+export function EditModal({ handleModal }: EditModalProps) {
   const { handleUpdateTaskInput, handleUpdateTaskList, updateTask, taskList } = useContext(ToDoContext)
+  const currentTask = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
 
-  function handleEditTask(id: string, description: string) {
+  function handleEditTask() {
     event!.preventDefault()
+
+    const verifyContentExists = taskList.filter(task => task.content.trim().toLowerCase() === updateTask.trim().toLowerCase())
 
     if (updateTask.trim() === '') {
       errorEmptyEditMessage()
-    } else if (description === updateTask) {
+    } else if (verifyContentExists.length >= 1) {
       errorDuplicateMessage()
     } else {
-      const taskListDoneUpdated = taskList.map(task => task.id === id ? { ...task, content: updateTask } : task)
+      const taskListEditedUpdated = taskList.map(task => task.id === currentTask.id ? { ...task, content: updateTask, } : task)
+      handleUpdateTaskList(taskListEditedUpdated)
       successEditMessage()
-      handleUpdateTaskList(taskListDoneUpdated)
       handleModal()
     }
 
@@ -38,15 +39,13 @@ export function EditModal({ description, taskId, handleModal }: EditModalProps) 
           Atualize sua task
         </Dialog.Title>
 
-        <form onSubmit={() => handleEditTask(taskId, description)} className={styles.form}>
+        <form onSubmit={handleEditTask} className={styles.form}>
           <div className={styles.inputs}>
-            <label htmlFor="description">Descrição atual</label>
+            <label htmlFor="task">Descrição Atual</label>
             <input
-              name="description"
-              id="description"
-              placeholder=""
+              placeholder="Pray the sun"
               type="text"
-              value={description}
+              value={currentTask.content}
               disabled
             />
 

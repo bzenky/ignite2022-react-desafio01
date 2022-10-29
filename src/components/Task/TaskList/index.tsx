@@ -16,46 +16,35 @@ export function TaskList() {
     }
 
     return (
-        <Dialog.Root open={open} onOpenChange={setOpen}>
-            <div className={styles.taskWrapper}>
-                <div className={styles.taskHeader}>
-                    <span className={styles.tasksCreated}>
-                        Tarefas Criadas
-                        <span>{taskList.length}</span>
+        <div className={styles.taskWrapper}>
+            <div className={styles.taskHeader}>
+                <span className={styles.tasksCreated}>
+                    Tarefas Criadas
+                    <span>{taskList.length}</span>
+                </span>
+                <span className={styles.tasksDone}>
+                    Concluídas
+                    <span>
+                        {taskList.filter(task => task.isTaskDone).length} de {taskList.length}
                     </span>
-                    <span className={styles.tasksDone}>
-                        Concluídas
-                        <span>
-                            {taskList.filter(task => task.isTaskDone).length} de {taskList.length}
-                        </span>
-                    </span>
-                </div>
-                {taskList.length === 0
-                    ? <EmptyTaskList />
-                    : (
-                        taskList.map(task => {
-                            return (
-                                <>
-                                    <TaskItem
-                                        key={task.id}
-                                        content={task.content}
-                                        taskId={task.id}
-                                        isTaskDone={task.isTaskDone}
-                                        createdAt={task.createdAt}
-                                    />
-
-                                    <EditModal
-                                        description={task.content}
-                                        taskId={task.id}
-                                        handleModal={handleModal}
-                                    />
-                                </>
-                            )
-                        })
-                    )
-                }
+                </span>
             </div>
-
-        </Dialog.Root>
+            {taskList.length === 0
+                ? <EmptyTaskList />
+                : (
+                    <Dialog.Root open={open} onOpenChange={setOpen}>
+                        {taskList.map(task => {
+                            return (
+                                <TaskItem
+                                    key={task.id}
+                                    task={task}
+                                />
+                            )
+                        })}
+                        <EditModal handleModal={handleModal} />
+                    </Dialog.Root>
+                )
+            }
+        </div>
     )
 }
