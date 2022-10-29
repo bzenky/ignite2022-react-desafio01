@@ -9,6 +9,7 @@ import {
   errorDuplicateMessage,
   errorEmptyMessage,
   successAddMessage,
+  successEditMessage,
   successRemoveMessage
 } from "../components/Toasty";
 import { dateFormatter } from "../utils/formatter";
@@ -20,9 +21,12 @@ interface ToDoContextProviderProps {
 interface ToDoContextProps {
   handleAddTask: (event: FormEvent) => void
   handleNewTaskInput: (value: string) => void
+  handleUpdateTaskInput: (value: string) => void
+  handleUpdateTaskList: (updatedTasklist: Task[]) => void
   handleTaskDone: (id: string) => void
   handleRemoveTask: (id: string) => void
   newTask: string
+  updateTask: string
   taskList: Task[]
 }
 
@@ -38,6 +42,7 @@ export const ToDoContext = createContext({} as ToDoContextProps)
 export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
   const [taskList, setTaskList] = useState<Task[]>(JSON.parse(window.localStorage.getItem('taskList') || '[]'));
   const [newTask, setNewTask] = useState('');
+  const [updateTask, setUpdateTask] = useState('')
   const id = String(new Date().getTime())
 
   useEffect(() => {
@@ -65,6 +70,14 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
     setNewTask(value)
   }
 
+  function handleUpdateTaskInput(value: string) {
+    setUpdateTask(value)
+  }
+
+  function handleUpdateTaskList(updatedTasklist: Task[]) {
+    setTaskList(updatedTasklist)
+  }
+
   function handleTaskDone(id: string) {
     const taskListDoneUpdated = taskList.map(task => task.id === id ? { ...task, isTaskDone: !task.isTaskDone } : task)
     setTaskList(taskListDoneUpdated)
@@ -84,8 +97,11 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
         handleNewTaskInput,
         handleTaskDone,
         handleRemoveTask,
+        handleUpdateTaskInput,
+        handleUpdateTaskList,
         newTask,
         taskList,
+        updateTask,
       }}
     >
       {children}
