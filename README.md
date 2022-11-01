@@ -13,23 +13,22 @@ Este é o primeiro desafio da atualização 2022 da trilha ReactJS do Ignite.
 
 A aplicação é um Todo List com as seguintes funcionalidades:
 - Adicionar tarefa;
+- Editar tarefa;
+- Excluir tarefa;
 - Mudar o estado da tarefa;
-- Excluir tarefa
+- Data de criação da tarefa;
 
 ## Stacks
 - ReactJs
 - ViteJs
 - Typescript
-
-## Milha Extra
-- Toast
-- LocalStorage
+- Radix
 
 ## Rodando
 
 Clonar o repositório e rodar o comando
 ```
-yarn / npm install
+yarn install
 ```
 
 Disponível também em https://www.todolist.bzenky.dev/
