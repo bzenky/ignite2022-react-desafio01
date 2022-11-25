@@ -3,9 +3,9 @@ import { ToDoContext } from '../../../contexts/ToDoContext'
 import * as Dialog from '@radix-ui/react-dialog'
 import { EmptyTaskList } from '../EmptyTaskList'
 import { TaskItem } from '../TaskItem'
-
-import styles from './TaskList.module.scss'
 import { EditModal } from '../../EditModal'
+
+import { TaskListContainer, TaskListHeader } from './styles'
 
 export function TaskList() {
     const [open, setOpen] = useState(false)
@@ -16,19 +16,19 @@ export function TaskList() {
     }
 
     return (
-        <div className={styles.taskWrapper}>
-            <div className={styles.taskHeader}>
-                <span className={styles.tasksCreated}>
+        <TaskListContainer>
+            <TaskListHeader>
+                <span className='tasksCreated'>
                     Tarefas Criadas
                     <span>{taskList.length}</span>
                 </span>
-                <span className={styles.tasksDone}>
+                <span className='tasksDone'>
                     Concluídas
                     <span>
                         {taskList.filter(task => task.isTaskDone).length} de {taskList.length}
                     </span>
                 </span>
-            </div>
+            </TaskListHeader>
             {taskList.length === 0
                 ? <EmptyTaskList />
                 : (
@@ -45,6 +45,6 @@ export function TaskList() {
                     </Dialog.Root>
                 )
             }
-        </div>
+        </TaskListContainer>
     )
 }

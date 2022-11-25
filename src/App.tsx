@@ -1,13 +1,19 @@
 import { ToDoContextProvider } from "./contexts/ToDoContext"
 import { Header } from "./components/Header"
 import { Task } from "./components/Task"
+import { GlobalStyle } from "./styles/global"
+import { ThemeProvider } from "styled-components"
+import { defaultTheme } from "./styles/themes/default"
 
 function App() {
   return (
     <ToDoContextProvider>
-      <Header />
+      <ThemeProvider theme={defaultTheme}>
+        <Header />
 
-      <Task />
+        <Task />
+        <GlobalStyle />
+      </ThemeProvider>
     </ToDoContextProvider>
   )
 }

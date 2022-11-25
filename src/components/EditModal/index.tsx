@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { ToDoContext } from '../../contexts/ToDoContext'
 import * as Dialog from '@radix-ui/react-dialog'
-import styles from './EditModal.module.scss'
 import { errorDuplicateMessage, errorEmptyEditMessage, successEditMessage } from '../Toasty'
+import { Footer, Form, InputWrapper, ModalContainer, Overlay } from './styles'
 
 interface EditModalProps {
   handleModal: () => void
@@ -33,18 +33,16 @@ export function EditModal({ handleModal }: EditModalProps) {
 
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className={styles.overlay} />
-      <Dialog.Content className={styles.modal}>
-        <Dialog.Title className={styles.title}>
+      <Overlay />
+      <ModalContainer>
+        <h2>
           Atualize sua task
-        </Dialog.Title>
+        </h2>
 
-        <form onSubmit={handleEditTask} className={styles.form}>
-          <div className={styles.inputs}>
+        <Form onSubmit={handleEditTask}>
+          <InputWrapper>
             <label htmlFor="task">Descrição Atual</label>
             <input
-              placeholder="Pray the sun"
-              type="text"
               value={currentTask.content}
               disabled
             />
@@ -54,16 +52,15 @@ export function EditModal({ handleModal }: EditModalProps) {
               name="task"
               id="task"
               placeholder="Insira a atualização da descrição"
-              type="text"
               onChange={(event) => handleUpdateTaskInput(event.target.value)}
             />
-          </div>
+          </InputWrapper>
 
-          <footer className={styles.footer}>
+          <Footer>
             <Dialog.Close asChild>
               <button
                 type="button"
-                className={styles.cancel}
+                className='cancel'
               >
                 Cancelar
               </button>
@@ -71,14 +68,14 @@ export function EditModal({ handleModal }: EditModalProps) {
 
             <button
               type="submit"
-              className={styles.submit}
+              className='submit'
             >
               Atualizar
             </button>
-          </footer>
-        </form>
+          </Footer>
+        </Form>
 
-      </Dialog.Content>
+      </ModalContainer>
     </Dialog.Portal>
   )
 }

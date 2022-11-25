@@ -1,17 +1,17 @@
 import { TaskAdd } from "./TaskAdd"
 import { TaskList } from "./TaskList"
 import { Toasty } from '../Toasty'
+import { TaskContainer } from "./styles"
 
-import styles from './Task.module.scss'
 
 export function Task() {
     return (
-        <main className={styles.main}>
+        <TaskContainer>
             <TaskAdd />
 
             <TaskList />
 
             <Toasty />
-        </main>
+        </TaskContainer>
     )
 }

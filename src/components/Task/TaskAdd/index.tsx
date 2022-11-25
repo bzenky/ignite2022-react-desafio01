@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { ToDoContext } from '../../../contexts/ToDoContext'
+import { PlusCircle } from 'phosphor-react'
 
-import styles from './TaskAdd.module.scss'
-import addIcon from '../../../assets/icon-add.svg'
+import { NewTaskForm, TaskAddContainer } from './styles'
 
 export function TaskAdd() {
     const {
@@ -12,23 +12,20 @@ export function TaskAdd() {
     } = useContext(ToDoContext)
 
     return (
-        <div className={styles.taskAddWrapper} onSubmit={handleAddTask}>
-            <form className={styles.newTaskForm}>
+        <TaskAddContainer onSubmit={handleAddTask}>
+            <NewTaskForm>
                 <input
-                    type="text"
                     placeholder="Adicione uma nova tarefa"
-                    className={styles.taskInput}
                     onChange={(event) => handleNewTaskInput(event.target.value)}
                     value={newTask}
                 />
                 <button
-                    className={styles.taskCreateButton}
                     title="Adicione uma nova tarefa"
                 >
                     Criar
-                    <img src={addIcon} alt="Ícone de adicionar" />
+                    <PlusCircle width={20} height={20} color='#FFF' />
                 </button>
-            </form>
-        </div>
+            </NewTaskForm>
+        </TaskAddContainer>
     )
 }

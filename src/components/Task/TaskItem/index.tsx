@@ -1,9 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { Pencil, Trash } from 'phosphor-react'
+import { Check, Pencil, Trash } from 'phosphor-react'
 import { useContext } from 'react'
 import { ToDoContext } from '../../../contexts/ToDoContext'
-
-import styles from './TaskItem.module.scss'
+import { TaskControlsWrapper, TaskHandle, TaskItemContainer } from './styles'
 
 interface TaskItemProps {
   task: TaskProps
@@ -25,23 +24,23 @@ export function TaskItem({ task }: TaskItemProps) {
   }
 
   return (
-    <div className={styles.taskItem}>
-      <div className={`${styles.taskHandle} ${isTaskDone && styles.done}`} onClick={() => handleTaskDone(id)} title={`Tarefa criada em ${createdAt}`} >
-        <span className={styles.radioTask}></span>
-        <span className={styles.taskContent}>{content}</span>
-      </div>
+    <TaskItemContainer>
+      <TaskHandle className={`${isTaskDone && 'done'}`} onClick={() => handleTaskDone(id)} title={`Tarefa criada em ${createdAt}`} >
+        <span className='radioTask'>{isTaskDone && <Check width={10} color='#FFF' weight='bold' />}</span>
+        <span className='taskContent'>{content}</span>
+      </TaskHandle>
 
-      <div className={styles.controls}>
+      <TaskControlsWrapper>
         <Dialog.Trigger asChild>
-          <button className={styles.editBtn} onClick={setItemIdStorage} title='Editar tarefa'>
+          <button className='editBtn' onClick={setItemIdStorage} title='Editar tarefa'>
             <Pencil width={20} color='#808080' />
           </button>
         </Dialog.Trigger>
 
-        <button className={styles.deleteBtn} onClick={() => handleRemoveTask(id)} title='Remover tarefa'>
+        <button className='deleteBtn' onClick={() => handleRemoveTask(id)} title='Remover tarefa'>
           <Trash width={20} color='#808080' />
         </button>
-      </div>
-    </div>
+      </TaskControlsWrapper>
+    </TaskItemContainer>
   )
 }
