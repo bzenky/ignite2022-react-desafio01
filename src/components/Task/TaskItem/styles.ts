@@ -4,13 +4,10 @@ export const TaskItemContainer = styled.div`
   display: flex;
   width: 100%;
   padding: 16px;
+  margin-bottom: 12px;
   background-color: ${({ theme }) => theme.backgroundTaskItem};
   border: 1px solid ${({ theme }) => theme.border};
   border-radius: 8px;
-
-  &+& {
-    margin-top: 12px;
-  }
 `
 
 export const TaskHandle = styled.div`
