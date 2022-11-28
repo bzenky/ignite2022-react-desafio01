@@ -43,7 +43,7 @@ export function EditModal({ handleModal }: EditModalProps) {
   return (
     <Dialog.Portal>
       <Overlay />
-      <ModalContainer>
+      <ModalContainer onOpenAutoFocus={(event) => event.preventDefault()}>
         <h2>
           Atualize sua task
         </h2>
@@ -56,7 +56,7 @@ export function EditModal({ handleModal }: EditModalProps) {
                 value={currentTask.content}
                 disabled
               />
-              <ButtonCopy onClick={handleCopyTask}><CopySimple size={18} color='#F2F2F2' /></ButtonCopy>
+              <ButtonCopy onClick={handleCopyTask}><CopySimple size={18} color='#D9D9D9' /></ButtonCopy>
             </div>
 
             <label htmlFor="task">Nova Descrição</label>
