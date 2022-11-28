@@ -74,12 +74,17 @@ export const InputWrapper = styled.div`
     gap: 12px;
     margin-top: 24px;
 
+    > div {
+      position: relative;
+    }
+
     label {
       color: ${({ theme }) => theme.textLabel};
       font-size: 0.875rem;
     }
 
     input {
+      width: 100%;
       padding: 12px 12px;
       color: ${({ theme }) => theme.text};
       background: ${({ theme }) => theme.inputBackground};
@@ -95,6 +100,29 @@ export const InputWrapper = styled.div`
         outline-offset: 2px;
       }
     }
+`
+
+export const ButtonCopy = styled.button`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 5;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+
+  &:focus {
+    border: 2px solid ${({ theme }) => theme.secondaryDark};
+    outline: none;
+  }
 `
 
 export const Footer = styled.div`
