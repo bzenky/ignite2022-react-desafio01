@@ -1,14 +1,17 @@
 import { useContext } from 'react'
+import { CopySimple } from 'phosphor-react'
 import { ToDoContext } from '../../contexts/ToDoContext'
 import * as Dialog from '@radix-ui/react-dialog'
-import { errorDuplicateMessage, errorEmptyEditMessage, successEditMessage } from '../Toasty'
-import { Footer, Form, InputWrapper, ModalContainer, Overlay } from './styles'
+import { useCopyToClipboard } from '../../hooks/useCopyToClipboard'
+import { errorDuplicateMessage, errorEmptyEditMessage, successCopiedMessage, successEditMessage } from '../Toasty'
+import { ButtonCopy, Footer, Form, InputWrapper, ModalContainer, Overlay } from './styles'
 
 interface EditModalProps {
   handleModal: () => void
 }
 
 export function EditModal({ handleModal }: EditModalProps) {
+  const [value, copy] = useCopyToClipboard()
   const { handleUpdateTaskInput, handleUpdateTaskList, updateTask, taskList } = useContext(ToDoContext)
   const currentTask = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
 
@@ -31,10 +34,16 @@ export function EditModal({ handleModal }: EditModalProps) {
     handleUpdateTaskInput('')
   }
 
+  function handleCopyTask() {
+    event!.preventDefault()
+    copy(currentTask.content)
+    successCopiedMessage()
+  }
+
   return (
     <Dialog.Portal>
       <Overlay />
-      <ModalContainer>
+      <ModalContainer onOpenAutoFocus={(event) => event.preventDefault()}>
         <h2>
           Atualize sua task
         </h2>
@@ -42,10 +51,13 @@ export function EditModal({ handleModal }: EditModalProps) {
         <Form onSubmit={handleEditTask}>
           <InputWrapper>
             <label htmlFor="task">Descrição Atual</label>
-            <input
-              value={currentTask.content}
-              disabled
-            />
+            <div>
+              <input
+                value={currentTask.content}
+                disabled
+              />
+              <ButtonCopy onClick={handleCopyTask}><CopySimple size={18} color='#D9D9D9' /></ButtonCopy>
+            </div>
 
             <label htmlFor="task">Nova Descrição</label>
             <input
