@@ -22,7 +22,7 @@ const fadeOut = keyframes`
 export const Overlay = styled(Dialog.Overlay)`
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(4px);
 
     &[data-state='open'] {
