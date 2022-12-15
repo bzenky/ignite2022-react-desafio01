@@ -45,7 +45,7 @@ export function EditModal({ handleModal }: EditModalProps) {
       <Overlay />
       <ModalContainer onOpenAutoFocus={(event) => event.preventDefault()}>
         <h2>
-          Atualize sua task
+          Atualize sua tarefa
         </h2>
 
         <Form onSubmit={handleEditTask}>
@@ -54,9 +54,12 @@ export function EditModal({ handleModal }: EditModalProps) {
             <div>
               <input
                 value={currentTask.content}
-                disabled
+                readOnly
               />
-              <ButtonCopy onClick={handleCopyTask}><CopySimple size={18} color='#D9D9D9' /></ButtonCopy>
+
+              <ButtonCopy type="button" onClick={handleCopyTask}>
+                <CopySimple size={18} color='#D9D9D9' />
+              </ButtonCopy>
             </div>
 
             <label htmlFor="task">Nova Descrição</label>
@@ -65,6 +68,7 @@ export function EditModal({ handleModal }: EditModalProps) {
               id="task"
               placeholder="Insira a atualização da descrição"
               onChange={(event) => handleUpdateTaskInput(event.target.value)}
+              autoFocus
             />
           </InputWrapper>
 
