@@ -66,14 +66,15 @@ export function TaskList() {
                                     ref={provided.innerRef}
                                     style={getListStyle(snapshot.isDraggingOver)}
                                 >
-                                    {taskList.map((task, index) => {
-                                        return (
-                                            <Draggable key={task.id} draggableId={task.id} index={index}>
-                                                {(provided, snapshot) => (
-                                                    <Dialog.Root
-                                                        open={open}
-                                                        onOpenChange={setOpen}
-                                                    >
+                                    <Dialog.Root
+                                        open={open}
+                                        onOpenChange={setOpen}
+                                    >
+                                        {taskList.map((task, index) => {
+                                            return (
+                                                <Draggable key={task.id} draggableId={task.id} index={index}>
+                                                    {(provided, snapshot) => (
+
                                                         <div
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
@@ -89,12 +90,13 @@ export function TaskList() {
                                                             />
                                                         </div>
 
-                                                        <EditModal handleModal={handleModal} />
-                                                    </Dialog.Root>
-                                                )}
-                                            </Draggable>
-                                        )
-                                    })}
+
+                                                    )}
+                                                </Draggable>
+                                            )
+                                        })}
+                                        <EditModal handleModal={handleModal} />
+                                    </Dialog.Root>
                                     {provided.placeholder}
                                 </div>
                             )}
