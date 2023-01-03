@@ -4,5 +4,5 @@ export const GA_TRACKING_ID = 'G-WPBZSLGCYH'
 
 export function SetGA() {
     ReactGA.initialize(GA_TRACKING_ID)
-    ReactGA.pageview('Site view')
+    ReactGA.pageview(window.location.pathname)
 }
