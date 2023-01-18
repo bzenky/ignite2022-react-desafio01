@@ -12,15 +12,17 @@ export function TaskAdd() {
     } = useContext(ToDoContext)
 
     return (
-        <TaskAddContainer onSubmit={handleAddTask}>
-            <NewTaskForm>
+        <TaskAddContainer>
+            <NewTaskForm onSubmit={handleAddTask}>
                 <input
                     placeholder="Adicione uma nova tarefa"
                     onChange={(event) => handleNewTaskInput(event.target.value)}
                     value={newTask}
                 />
+
                 <button
                     title="Adicione uma nova tarefa"
+                    type="submit"
                 >
                     Criar
                     <PlusCircle width={20} height={20} color='#FFF' />

@@ -4,21 +4,21 @@ import {
   ReactNode,
   useEffect,
   useState
-} from "react";
+} from "react"
 import {
   errorDuplicateMessage,
   errorEmptyMessage,
   successAddMessage,
   successRemoveMessage
-} from "../components/Toasty";
-import { dateFormatter } from "../utils/formatter";
+} from "../components/Toasty"
+import { dateFormatter } from "../utils/formatter"
 
 interface ToDoContextProviderProps {
   children: ReactNode
 }
 
 interface ToDoContextProps {
-  handleAddTask: () => void
+  handleAddTask: (event: FormEvent) => void
   handleNewTaskInput: (value: string) => void
   handleUpdateTaskInput: (value: string) => void
   handleUpdateTaskList: (updatedTasklist: Task[]) => void
@@ -48,17 +48,20 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
     window.localStorage.setItem('taskList', JSON.stringify(taskList))
   }, [taskList])
 
-  function handleAddTask() {
-    event!.preventDefault()
+  function handleAddTask(event: FormEvent) {
+    event.preventDefault()
     const date = dateFormatter.format(new Date())
-    const verifyContentExists = taskList.filter(task => task.content.trim() === newTask.trim())
+    const checkTaskExists = taskList.filter(task => task.content.trim() === newTask.trim()).length > 0
 
-    if (newTask.trim() !== '' && verifyContentExists.length === 0) {
-      setTaskList([...taskList, { id, content: newTask, isTaskDone: false, createdAt: date }])
+    if (newTask.trim() !== '' && !checkTaskExists) {
+      setTaskList((state) => ([
+        { id, content: newTask, isTaskDone: false, createdAt: date },
+        ...state,
+      ]))
       successAddMessage()
     } else if (newTask.trim() === '') {
       errorEmptyMessage()
-    } else if (verifyContentExists.length !== 0) {
+    } else if (checkTaskExists) {
       errorDuplicateMessage()
     }
 
