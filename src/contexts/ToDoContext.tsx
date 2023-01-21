@@ -34,6 +34,7 @@ interface Task {
   content: string
   isTaskDone: boolean
   createdAt: string
+  editedAt?: string
 }
 
 export const ToDoContext = createContext({} as ToDoContextProps)

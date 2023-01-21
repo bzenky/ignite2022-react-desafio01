@@ -1,10 +1,11 @@
-import * as Tooltip from '@radix-ui/react-tooltip'
 import { ReactNode } from 'react'
+import * as Tooltip from '@radix-ui/react-tooltip'
+import { v4 as uuid } from 'uuid'
 import { Content, TooltipArrow } from './styles'
 
 interface TooltipProps {
     children: ReactNode
-    message: string
+    message: string | string[]
 }
 
 export function TooltipHint({ children, message }: TooltipProps) {
@@ -16,7 +17,10 @@ export function TooltipHint({ children, message }: TooltipProps) {
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
                     <Content>
-                        {message}
+                        {typeof message === 'string'
+                            ? message
+                            : message.map(eachMessage => <span key={uuid()}>{eachMessage}</span>)
+                        }
                         <TooltipArrow />
                     </Content>
                 </Tooltip.Portal>

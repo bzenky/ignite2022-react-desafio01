@@ -47,7 +47,7 @@ export const slideLeftAndFade = keyframes`
 
 export const Content = styled(Tooltip.Content)`
     width: 90%;
-    max-width: 320px;
+    max-width: 240px;
     padding: 10px 8px;
     background: ${({ theme }) => theme.secondaryDark};
     text-align: center;
@@ -72,6 +72,10 @@ export const Content = styled(Tooltip.Content)`
     }
     &[data-state='delayed-open'][data-side='left'] {
         animation-name: ${slideRightAndFade};
+    }
+
+    > span {
+        display: block;
     }
 `
 

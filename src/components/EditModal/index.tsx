@@ -1,9 +1,10 @@
 import { useContext } from 'react'
 import { CopySimple } from 'phosphor-react'
-import { ToDoContext } from '../../contexts/ToDoContext'
 import * as Dialog from '@radix-ui/react-dialog'
+import { ToDoContext } from '../../contexts/ToDoContext'
 import { useCopyToClipboard } from '../../hooks/useCopyToClipboard'
 import { errorDuplicateMessage, errorEmptyEditMessage, successCopiedMessage, successEditMessage } from '../Toasty'
+import { dateFormatter } from '../../utils/formatter'
 import { ButtonCopy, Footer, Form, InputWrapper, ModalContainer, Overlay } from './styles'
 
 interface EditModalProps {
@@ -12,7 +13,12 @@ interface EditModalProps {
 
 export function EditModal({ handleModal }: EditModalProps) {
   const [value, copy] = useCopyToClipboard()
-  const { handleUpdateTaskInput, handleUpdateTaskList, updateTask, taskList } = useContext(ToDoContext)
+  const {
+    handleUpdateTaskInput,
+    handleUpdateTaskList,
+    updateTask,
+    taskList
+  } = useContext(ToDoContext)
   const currentTask = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
 
   function handleEditTask() {
@@ -25,7 +31,11 @@ export function EditModal({ handleModal }: EditModalProps) {
     } else if (verifyContentExists.length >= 1) {
       errorDuplicateMessage()
     } else {
-      const taskListEditedUpdated = taskList.map(task => task.id === currentTask.id ? { ...task, content: updateTask, } : task)
+      const lastEditDate = dateFormatter.format(new Date())
+      const taskListEditedUpdated = taskList.map(task => task.id === currentTask.id
+        ? { ...task, content: updateTask, editedAt: lastEditDate }
+        : task
+      )
       handleUpdateTaskList(taskListEditedUpdated)
       successEditMessage()
       handleModal()
