@@ -26,8 +26,6 @@ export function TaskItem({ task }: TaskItemProps) {
     window.localStorage.setItem('currentTask', JSON.stringify(task))
   }
 
-  console.log(useIsMobile)
-
   return (
     <TaskItemContainer>
       <TaskHandle className={`${isTaskDone && 'done'}`} onClick={() => handleTaskDone(id)} title={`Tarefa criada em ${createdAt}`} >

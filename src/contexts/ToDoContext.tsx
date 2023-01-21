@@ -82,7 +82,11 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
 
   function handleTaskDone(id: string) {
     const taskListDoneUpdated = taskList.map(task => task.id === id ? { ...task, isTaskDone: !task.isTaskDone } : task)
-    setTaskList(taskListDoneUpdated)
+    const taskListSorted = taskListDoneUpdated.sort((value) => {
+      return value.isTaskDone ? 1 : -1
+    })
+
+    setTaskList(taskListSorted)
   }
 
   function handleRemoveTask(id: string) {
