@@ -28,7 +28,7 @@ export function TaskItem({ task }: TaskItemProps) {
 
   return (
     <TaskItemContainer>
-      <TaskHandle className={`${isTaskDone && 'done'}`} onClick={() => handleTaskDone(id)} title={`Tarefa criada em ${createdAt}`} >
+      <TaskHandle className={`${isTaskDone && 'done'}`} onClick={() => handleTaskDone(id)}>
         <span className='radioTask'>{isTaskDone && <Check width={10} color='#FFF' weight='bold' />}</span>
         <span className='taskContent'>{content}</span>
       </TaskHandle>
