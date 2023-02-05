@@ -85,7 +85,7 @@ export const InputWrapper = styled.div`
 
     input {
       width: 100%;
-      padding: 12px 12px;
+      padding: 12px 34px 12px 12px;
       color: ${({ theme }) => theme.text};
       background: ${({ theme }) => theme.inputBackground};
       border: none;
