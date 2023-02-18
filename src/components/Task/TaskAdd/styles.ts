@@ -47,9 +47,13 @@ export const NewTaskForm = styled.form`
         border: none;
         cursor: pointer;
 
-        transition: background-color 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
 
-        &:hover {
+        &:disabled {
+            opacity: 0.6;
+        }
+
+        &:not(:disabled):hover {
             background-color: ${({ theme }) => theme.primary};
         }
 

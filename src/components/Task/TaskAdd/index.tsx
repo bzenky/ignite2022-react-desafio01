@@ -23,6 +23,7 @@ export function TaskAdd() {
                 <button
                     title="Adicione uma nova tarefa"
                     type="submit"
+                    disabled={newTask.trim().length === 0}
                 >
                     Criar
                     <PlusCircle width={20} height={20} color='#FFF' />

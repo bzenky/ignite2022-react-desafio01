@@ -26,9 +26,7 @@ export function EditModal({ handleModal }: EditModalProps) {
 
     const verifyContentExists = taskList.filter(task => task.content.trim().toLowerCase() === updateTask.trim().toLowerCase())
 
-    if (updateTask.trim() === '') {
-      errorEmptyEditMessage()
-    } else if (verifyContentExists.length >= 1) {
+    if (verifyContentExists.length >= 1) {
       errorDuplicateMessage()
     } else {
       const lastEditDate = dateFormatter.format(new Date())
