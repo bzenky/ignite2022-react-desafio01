@@ -16,15 +16,18 @@ interface TaskProps {
   isTaskDone: boolean
   createdAt: string
   editedAt?: string
+  doneAt?: string
 }
 
 export function TaskItem({ task }: TaskItemProps) {
   const { handleRemoveTask, handleTaskDone } = useContext(ToDoContext)
-  const { content, id, isTaskDone, createdAt, editedAt } = task
+  const { content, id, isTaskDone, createdAt, editedAt, doneAt } = task
   const isMobile = useIsMobile()
   const createdAtMessage = `Tarefa criada em ${createdAt}`
   const editedAtMessage = editedAt ? `Última edição em ${editedAt}` : ''
-  const taskItemToolTipMessage = [createdAtMessage, editedAtMessage]
+  const doneAtMessage = doneAt ? `Tarefa concluída em ${doneAt}` : ''
+
+  const taskItemToolTipMessage = [createdAtMessage, editedAtMessage, doneAtMessage]
 
   function setItemIdStorage() {
     window.localStorage.setItem('currentTask', JSON.stringify(task))

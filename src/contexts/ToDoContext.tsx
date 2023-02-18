@@ -35,6 +35,7 @@ interface Task {
   isTaskDone: boolean
   createdAt: string
   editedAt?: string
+  doneAt?: string
 }
 
 export const ToDoContext = createContext({} as ToDoContextProps)
@@ -82,7 +83,17 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
   }
 
   function handleTaskDone(id: string) {
-    const taskListDoneUpdated = taskList.map(task => task.id === id ? { ...task, isTaskDone: !task.isTaskDone } : task)
+    const date = dateFormatter.format(new Date())
+
+    const taskListDoneUpdated = taskList
+      .map(task => task.id === id
+        ? {
+          ...task,
+          isTaskDone: !task.isTaskDone,
+          doneAt: !task.isTaskDone ? date : undefined,
+        }
+        : task)
+
     const taskListSorted = taskListDoneUpdated.sort((a, b) => {
       if (a.isTaskDone && !b.isTaskDone) {
         return 1
