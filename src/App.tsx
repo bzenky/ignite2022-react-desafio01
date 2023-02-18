@@ -5,14 +5,11 @@ import { Task } from "./components/Task"
 import { GlobalStyle } from "./styles/global"
 import { ThemeProvider } from "styled-components"
 import { defaultTheme } from "./styles/themes/default"
-import { useEffect } from 'react'
-import { SetGA } from './lib/gtag'
+
+const TRACKING_ID = "G-WPBZSLGCYH"
+ReactGA.initialize(TRACKING_ID)
 
 function App() {
-  useEffect(() => {
-    SetGA()
-  }, [])
-
   return (
     <ToDoContextProvider>
       <ThemeProvider theme={defaultTheme}>

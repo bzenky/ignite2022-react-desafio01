@@ -3,6 +3,7 @@ import { ToDoContext } from '../../../contexts/ToDoContext'
 import { PlusCircle } from 'phosphor-react'
 
 import { NewTaskForm, TaskAddContainer } from './styles'
+import { useAnalyticsEventTracker } from '../../../hooks/useAnalyticsEventTracker'
 
 export function TaskAdd() {
     const {
@@ -24,6 +25,11 @@ export function TaskAdd() {
                     title="Adicione uma nova tarefa"
                     type="submit"
                     disabled={newTask.trim().length === 0}
+                    onClick={() => useAnalyticsEventTracker({
+                        category: 'Task',
+                        action: 'Add',
+                        label: 'Add new task'
+                    })}
                 >
                     Criar
                     <PlusCircle width={20} height={20} color='#FFF' />
