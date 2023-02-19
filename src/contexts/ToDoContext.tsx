@@ -11,6 +11,7 @@ import {
   successAddMessage,
   successRemoveMessage
 } from "../components/Toasty"
+import { useAnalyticsEventTracker } from "../hooks/useAnalyticsEventTracker"
 import { dateFormatter } from "../utils/formatter"
 
 interface ToDoContextProviderProps {
@@ -68,6 +69,11 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
     }
 
     setNewTask('')
+    useAnalyticsEventTracker({
+      category: 'Task',
+      action: 'Create new task',
+      label: 'Add new task'
+    })
   }
 
   function handleNewTaskInput(value: string) {
@@ -105,6 +111,11 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
     })
 
     setTaskList(taskListSorted)
+    useAnalyticsEventTracker({
+      category: 'Task',
+      action: 'Complete Task',
+      label: 'Mark task as finished'
+    })
   }
 
   function handleRemoveTask(id: string) {
@@ -112,6 +123,12 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
 
     successRemoveMessage()
     setTaskList(taskListUpdated)
+
+    useAnalyticsEventTracker({
+      category: 'Task',
+      action: 'Remove Task',
+      label: 'Remove task from list'
+    })
   }
 
   return (
