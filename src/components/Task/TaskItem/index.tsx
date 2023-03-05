@@ -8,7 +8,7 @@ import { TaskControlsWrapper, TaskHandle, TaskItemContainer } from './styles'
 
 interface TaskItemProps {
   task: TaskProps
-  setSelectedOption: (value: string) => void
+  setSelectedOption: (value: 'edit' | 'remove') => void
 }
 
 interface TaskProps {
@@ -21,7 +21,7 @@ interface TaskProps {
 }
 
 export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
-  const { handleRemoveTask, handleTaskDone } = useContext(ToDoContext)
+  const { handleTaskDone } = useContext(ToDoContext)
   const { content, id, isTaskDone, createdAt, editedAt, doneAt } = task
   const isMobile = useIsMobile()
   const createdAtMessage = `Tarefa criada em ${createdAt}`
@@ -30,9 +30,9 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
 
   const taskItemToolTipMessage = [createdAtMessage, editedAtMessage, doneAtMessage]
 
-  function setItemIdStorage() {
+  function setItemIdStorage(type: 'edit' | 'remove') {
     window.localStorage.setItem('currentTask', JSON.stringify(task))
-    setSelectedOption('edit')
+    setSelectedOption(type)
   }
 
   return (
@@ -56,16 +56,18 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
 
         <TooltipHint message={'Editar tarefa'}>
           <Dialog.Trigger asChild>
-            <button className='editBtn' onClick={setItemIdStorage}>
+            <button className='editBtn' onClick={() => setItemIdStorage('edit')}>
               <Pencil width={20} color='#808080' />
             </button>
           </Dialog.Trigger>
         </TooltipHint>
 
         <TooltipHint message={'Remover tarefa'}>
-          <button className='deleteBtn' onClick={() => handleRemoveTask(id)}>
-            <Trash width={20} color='#808080' />
-          </button>
+          <Dialog.Trigger asChild>
+            <button className='deleteBtn' onClick={() => setItemIdStorage('remove')}>
+              <Trash width={20} color='#808080' />
+            </button>
+          </Dialog.Trigger>
         </TooltipHint>
       </TaskControlsWrapper>
     </TaskItemContainer>
