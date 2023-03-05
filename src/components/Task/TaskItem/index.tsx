@@ -1,6 +1,6 @@
+import { useContext } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Check, Info, Pencil, Trash } from 'phosphor-react'
-import { useContext } from 'react'
 import { ToDoContext } from '../../../contexts/ToDoContext'
 import { useIsMobile } from '../../../hooks/useIsMobile'
 import { TooltipHint } from '../../Tooltip'
@@ -8,6 +8,7 @@ import { TaskControlsWrapper, TaskHandle, TaskItemContainer } from './styles'
 
 interface TaskItemProps {
   task: TaskProps
+  setSelectedOption: (value: string) => void
 }
 
 interface TaskProps {
@@ -19,7 +20,7 @@ interface TaskProps {
   doneAt?: string
 }
 
-export function TaskItem({ task }: TaskItemProps) {
+export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
   const { handleRemoveTask, handleTaskDone } = useContext(ToDoContext)
   const { content, id, isTaskDone, createdAt, editedAt, doneAt } = task
   const isMobile = useIsMobile()
@@ -31,13 +32,19 @@ export function TaskItem({ task }: TaskItemProps) {
 
   function setItemIdStorage() {
     window.localStorage.setItem('currentTask', JSON.stringify(task))
+    setSelectedOption('edit')
   }
 
   return (
     <TaskItemContainer>
       <TaskHandle className={`${isTaskDone && 'done'}`} onClick={() => handleTaskDone(id)}>
-        <span className='radioTask'>{isTaskDone && <Check width={10} color='#FFF' weight='bold' />}</span>
-        <span className='taskContent'>{content}</span>
+        <span className='radioTask'>
+          {isTaskDone && <Check width={10} color='#FFF' weight='bold' />}
+        </span>
+
+        <span className='taskContent'>
+          {content}
+        </span>
       </TaskHandle>
 
       <TaskControlsWrapper>

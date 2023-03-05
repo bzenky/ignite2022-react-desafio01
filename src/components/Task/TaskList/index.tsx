@@ -1,15 +1,15 @@
 import { useContext, useState } from 'react'
-import { ToDoContext } from '../../../contexts/ToDoContext'
+import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'
 import * as Dialog from '@radix-ui/react-dialog'
+import { ToDoContext } from '../../../contexts/ToDoContext'
 import { EmptyTaskList } from '../EmptyTaskList'
 import { TaskItem } from '../TaskItem'
-import { EditModal } from '../../EditModal'
-
+import { Modal } from '../../Modal'
 import { TaskListContainer, TaskListHeader } from './styles'
-import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'
 
 export function TaskList() {
     const [open, setOpen] = useState(false)
+    const [selectedOption, setSelectedOption] = useState('')
     const { taskList, handleUpdateTaskList } = useContext(ToDoContext)
 
     function handleModal() {
@@ -59,7 +59,10 @@ export function TaskList() {
                 ? <EmptyTaskList />
                 : (
                     <DragDropContext onDragEnd={handleOnDragEnd}>
-                        <Droppable droppableId="droppable-area" direction="vertical">
+                        <Droppable
+                            droppableId="droppable-area"
+                            direction="vertical"
+                        >
                             {(provided, snapshot) => (
                                 <div
                                     {...provided.droppableProps}
@@ -87,6 +90,7 @@ export function TaskList() {
                                                         >
                                                             <TaskItem
                                                                 task={task}
+                                                                setSelectedOption={setSelectedOption}
                                                             />
                                                         </div>
 
@@ -95,7 +99,10 @@ export function TaskList() {
                                                 </Draggable>
                                             )
                                         })}
-                                        <EditModal handleModal={handleModal} />
+                                        <Modal
+                                            handleModal={handleModal}
+                                            type={selectedOption}
+                                        />
                                     </Dialog.Root>
                                     {provided.placeholder}
                                 </div>
