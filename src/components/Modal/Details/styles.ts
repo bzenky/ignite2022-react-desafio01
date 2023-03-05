@@ -1,15 +1,22 @@
 import styled from "styled-components"
 
-export const Description = styled.span`
-  display: block;
-  margin: 32px 0;
-  color: ${({ theme }) => theme.text};
+export const DetailsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  line-height: 1.5;
+
+  > span {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    color: ${({ theme }) => theme.text};
+  }
 `
 
-export const ButtonsWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   display: flex;
-  gap: 8px;
   justify-content: flex-end;
+  margin-top: 24px;
 
   > button {
       padding: 10px 16px;
@@ -23,14 +30,6 @@ export const ButtonsWrapper = styled.div`
       &:focus {
         outline: 2px solid ${({ theme }) => theme.secondaryDark};
         outline-offset: 2px;
-      }
-
-      &.remove {
-        background: ${({ theme }) => theme.danger};
-
-        &:hover {
-          background: ${({ theme }) => theme.dangerHover};
-        }
       }
 
       &.cancel {

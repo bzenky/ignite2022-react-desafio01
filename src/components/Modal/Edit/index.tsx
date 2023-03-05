@@ -1,7 +1,8 @@
 import { useContext } from 'react'
-import * as Dialog from '@radix-ui/react-dialog'
+import { DialogClose } from "@radix-ui/react-dialog"
 import { CopySimple } from 'phosphor-react'
 import { ToDoContext } from '../../../contexts/ToDoContext'
+import { TaskProps } from '../../Task/TaskItem'
 import { useCopyToClipboard } from '../../../hooks/useCopyToClipboard'
 import { dateFormatter } from '../../../utils/formatter'
 import { errorDuplicateMessage, successCopiedMessage, successEditMessage } from '../../Toasty'
@@ -19,7 +20,7 @@ export function Edit({ handleModal }: EditProps) {
     updateTask,
     taskList
   } = useContext(ToDoContext)
-  const currentTask = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
+  const currentTask: TaskProps = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
 
   function handleEditTask() {
     event!.preventDefault()
@@ -82,14 +83,14 @@ export function Edit({ handleModal }: EditProps) {
         </InputWrapper>
 
         <Footer>
-          <Dialog.Close asChild>
+          <DialogClose asChild>
             <button
               type="button"
               className='cancel'
             >
               Cancelar
             </button>
-          </Dialog.Close>
+          </DialogClose>
 
           <button
             type="submit"

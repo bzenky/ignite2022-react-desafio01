@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const TaskItemContainer = styled.div`
   display: flex;
@@ -75,8 +75,7 @@ export const TaskControlsWrapper = styled.div`
   align-items: center;
   gap: 6px;
 
-  .editBtn,
-  .deleteBtn {
+  > button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,7 +108,9 @@ export const TaskControlsWrapper = styled.div`
       svg {
 
         path,
-        line {
+        line,
+        circle,
+        polyline {
           stroke: ${({ theme }) => theme.danger};
         }
       }

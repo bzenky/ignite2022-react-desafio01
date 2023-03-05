@@ -9,7 +9,7 @@ import { TaskListContainer, TaskListHeader } from './styles'
 
 export function TaskList() {
     const [open, setOpen] = useState(false)
-    const [selectedOption, setSelectedOption] = useState<'edit' | 'remove'>('edit')
+    const [selectedOption, setSelectedOption] = useState<'edit' | 'remove' | 'details'>('edit')
     const { taskList, handleUpdateTaskList } = useContext(ToDoContext)
 
     function handleModal() {

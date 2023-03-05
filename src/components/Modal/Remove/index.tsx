@@ -1,6 +1,7 @@
 import { useContext } from 'react'
-import * as Dialog from '@radix-ui/react-dialog'
+import { DialogClose } from "@radix-ui/react-dialog"
 import { ToDoContext } from '../../../contexts/ToDoContext'
+import { TaskProps } from '../../Task/TaskItem'
 import { ButtonsWrapper, Description } from './styles'
 
 interface RemoveProps {
@@ -9,7 +10,7 @@ interface RemoveProps {
 
 export function Remove({ handleModal }: RemoveProps) {
   const { handleRemoveTask } = useContext(ToDoContext)
-  const currentTask = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
+  const currentTask: TaskProps = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
 
   function handleRemoveTaskModal() {
     handleModal()
@@ -27,14 +28,14 @@ export function Remove({ handleModal }: RemoveProps) {
       </Description>
 
       <ButtonsWrapper>
-        <Dialog.Close asChild>
+        <DialogClose asChild>
           <button
             type="button"
             className='cancel'
           >
             Cancelar
           </button>
-        </Dialog.Close>
+        </DialogClose>
 
         <button
           type="button"
