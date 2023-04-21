@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'
 import * as Dialog from '@radix-ui/react-dialog'
+import { useTheme } from 'styled-components'
 import { ToDoContext } from '../../../contexts/ToDoContext'
 import { EmptyTaskList } from '../EmptyTaskList'
 import { TaskItem } from '../TaskItem'
@@ -11,6 +12,7 @@ export function TaskList() {
     const [open, setOpen] = useState(false)
     const [selectedOption, setSelectedOption] = useState<'edit' | 'remove' | 'details'>('edit')
     const { taskList, handleUpdateTaskList } = useContext(ToDoContext)
+    const theme = useTheme()
 
     function handleModal() {
         setOpen(!open)
@@ -18,7 +20,7 @@ export function TaskList() {
 
     const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
         // Estilização do Item quando estiver realizando o drag
-        outline: isDragging && '2px solid #8284FA',
+        outline: isDragging && `2px solid ${theme.secondary}`,
         outlineOffset: '4px',
         borderRadius: '8px',
         ...draggableStyle,
@@ -26,7 +28,6 @@ export function TaskList() {
 
     const getListStyle = (isDraggingOver: boolean) => ({
         // Estilização da Lista quando estiver realizando o drag
-        background: isDraggingOver ? '#22222280' : '',
         transition: 'all 0.2s ease-out',
         borderRadius: '8px',
     })

@@ -20,3 +20,26 @@ export const defaultTheme = {
     textLabel: '#D9D9D9',
     textCounter: '#D9D9D9',
 }
+
+export const lightTheme = {
+    background: '#F2F2F2',
+    backgroundDark: '#D9D9D9',
+    backgroundCounter: '#E6E6E6',
+    backgroundTaskItem: '#F9F9F9',
+    backgroundModal: '#F9F9F9',
+    backgroundControlButtonHover: '#E6E6E6',
+    border: '#D9D9D9',
+    danger: '#E25858',
+    dangerHover: '#F22020',
+    inputBackground: '#FFFFFF',
+    inputPrimaryRadioHover: '#FFFFFF',
+    primary: '#c89f9c',
+    primaryDark: '#c97c5d',
+    secondary: '#c38e70',
+    secondaryDark: '#B36A5E',
+    shadowModal: '#00000015',
+    textDisabled: '#808080',
+    text: '#774936',
+    textLabel: '#333333',
+    textCounter: '#a98467',
+}

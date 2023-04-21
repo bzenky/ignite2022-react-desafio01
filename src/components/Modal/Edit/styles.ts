@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components'
+import { getContrast } from 'polished'
 
 export const Form = styled.form`
     display: flex;
@@ -73,7 +74,7 @@ export const Footer = styled.div`
       cursor: pointer;
       border: none;
       border-radius: 2px;
-      color: ${({ theme }) => theme.text};
+      color: ${({ theme }) => getContrast(theme.primaryDark, theme.text) > 4.5 ? theme.text : theme.background};
       transition: background 0.2s ease-out;
       font-weight: 500;
 

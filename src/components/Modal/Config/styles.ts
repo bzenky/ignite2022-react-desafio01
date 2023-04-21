@@ -1,25 +1,27 @@
 import styled from "styled-components"
 import { getContrast } from "polished"
 
-export const DetailsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 16px;
-  line-height: 1.5;
-
-  > span {
-    margin-top: 8px;
-    font-size: 0.875rem;
-    color: ${({ theme }) => theme.text};
-  }
+export const Main = styled.div`
+  margin-top: 24px;
 `
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 24px;
+export const ItemWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  > button {
+    > label {
+      color: ${({ theme }) => theme.textLabel};
+    }
+`
+
+export const Footer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 24px;
+
+    button {
       padding: 10px 16px;
       cursor: pointer;
       border: none;
@@ -34,6 +36,14 @@ export const ButtonWrapper = styled.div`
       }
 
       &.cancel {
+        background: ${({ theme }) => theme.danger};
+
+        &:hover {
+          background: ${({ theme }) => theme.dangerHover};
+        }
+      }
+
+      &.submit {
         background: ${({ theme }) => theme.primaryDark};
 
         &:hover {

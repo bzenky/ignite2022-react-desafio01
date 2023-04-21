@@ -23,7 +23,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
   const { handleTaskDone } = useContext(ToDoContext)
   const { content, id, isTaskDone } = task
 
-  function setItemIdStorage(type: 'edit' | 'remove' | 'details') {
+  function handleModal(type: 'edit' | 'remove' | 'details') {
     window.localStorage.setItem('currentTask', JSON.stringify(task))
     setSelectedOption(type)
   }
@@ -43,7 +43,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
       <TaskControlsWrapper>
         <TooltipHint message={'Ver detalhes da tarefa'}>
           <Dialog.Trigger asChild>
-            <button onClick={() => setItemIdStorage('details')}>
+            <button onClick={() => handleModal('details')}>
               <Info size={20} color='#808080' />
             </button>
           </Dialog.Trigger>
@@ -51,7 +51,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
 
         <TooltipHint message={'Editar tarefa'}>
           <Dialog.Trigger asChild>
-            <button onClick={() => setItemIdStorage('edit')}>
+            <button onClick={() => handleModal('edit')}>
               <Pencil width={20} color='#808080' />
             </button>
           </Dialog.Trigger>
@@ -59,7 +59,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
 
         <TooltipHint message={'Remover tarefa'}>
           <Dialog.Trigger asChild>
-            <button onClick={() => setItemIdStorage('remove')}>
+            <button onClick={() => handleModal('remove')}>
               <Trash width={20} color='#808080' />
             </button>
           </Dialog.Trigger>

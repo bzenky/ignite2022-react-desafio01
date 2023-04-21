@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { getContrast } from "polished"
 
 export const Description = styled.span`
   display: block;
@@ -16,7 +17,7 @@ export const ButtonsWrapper = styled.div`
       cursor: pointer;
       border: none;
       border-radius: 2px;
-      color: ${({ theme }) => theme.text};
+      color: ${({ theme }) => getContrast(theme.primaryDark, theme.text) > 4.5 ? theme.text : theme.background};
       transition: background 0.2s ease-out;
       font-weight: 500;
 
