@@ -22,6 +22,7 @@ export const Footer = styled.div`
     margin-top: 24px;
 
     button {
+      width: 88px;
       padding: 10px 16px;
       cursor: pointer;
       border: none;
