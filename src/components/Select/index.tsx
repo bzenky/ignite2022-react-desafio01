@@ -9,7 +9,7 @@ export function Select() {
   const { theme, handleChangeTheme } = useContext(ToDoContext)
 
   return (
-    <SelectR.Root value={theme} onValueChange={(value) => handleChangeTheme(value)}>
+    <SelectR.Root value={theme} onValueChange={(value: 'default' | 'light') => handleChangeTheme(value)}>
 
       <Trigger>
         <SelectR.Value />
