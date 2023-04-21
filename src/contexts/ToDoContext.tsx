@@ -25,7 +25,7 @@ interface ToDoContextProps {
   handleUpdateTaskList: (updatedTasklist: Task[]) => void
   handleTaskDone: (id: string) => void
   handleRemoveTask: (id: string) => void
-  handleChangeTheme: (theme: string) => void
+  handleChangeTheme: (theme: 'default' | 'light') => void
   newTask: string
   updateTask: string
   taskList: Task[]
@@ -47,7 +47,7 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
   const [taskList, setTaskList] = useState<Task[]>(JSON.parse(window.localStorage.getItem('taskList') || '[]'));
   const [newTask, setNewTask] = useState('');
   const [updateTask, setUpdateTask] = useState('')
-  const [theme, setTheme] = useState(JSON.parse(window.localStorage.getItem('@taskList:theme') || '[]'))
+  const [theme, setTheme] = useState<'default' | 'light'>(JSON.parse(window.localStorage.getItem('@taskList:theme') || '[]'))
   const id = String(new Date().getTime())
 
   useEffect(() => {
@@ -134,7 +134,7 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
     })
   }
 
-  function handleChangeTheme(theme: string) {
+  function handleChangeTheme(theme: 'default' | 'light') {
     setTheme(theme)
     window.localStorage.setItem('@taskList:theme', JSON.stringify(theme))
   }
