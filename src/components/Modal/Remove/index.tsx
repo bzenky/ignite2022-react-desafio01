@@ -3,6 +3,7 @@ import { DialogClose } from "@radix-ui/react-dialog"
 import { ToDoContext } from '../../../contexts/ToDoContext'
 import { TaskProps } from '../../Task/TaskItem'
 import { ButtonsWrapper, Description } from './styles'
+import { GetLocalStorageItem } from '../../../utils/localStorage'
 
 interface RemoveProps {
   handleModal: () => void
@@ -10,7 +11,7 @@ interface RemoveProps {
 
 export function Remove({ handleModal }: RemoveProps) {
   const { handleRemoveTask } = useContext(ToDoContext)
-  const currentTask: TaskProps = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
+  const currentTask: TaskProps = GetLocalStorageItem('currentTask') || '{}'
 
   function handleRemoveTaskModal() {
     handleModal()

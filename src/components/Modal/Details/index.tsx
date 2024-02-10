@@ -1,9 +1,10 @@
 import { DialogClose } from "@radix-ui/react-dialog"
 import { TaskProps } from "../../Task/TaskItem"
 import { ButtonWrapper, DetailsWrapper } from "./styles"
+import { GetLocalStorageItem } from "../../../utils/localStorage"
 
 export function Details() {
-  const currentTask: TaskProps = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
+  const currentTask: TaskProps = GetLocalStorageItem('currentTask') || '{}'
   const { createdAt, doneAt, editedAt } = currentTask
 
   return (

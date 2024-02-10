@@ -7,6 +7,7 @@ import { useCopyToClipboard } from '../../../hooks/useCopyToClipboard'
 import { dateFormatter } from '../../../utils/formatter'
 import { errorDuplicateMessage, successCopiedMessage, successEditMessage } from '../../Toasty'
 import { ButtonCopy, Footer, Form, InputWrapper } from './styles'
+import { GetLocalStorageItem } from '../../../utils/localStorage'
 
 interface EditProps {
   handleModal: () => void
@@ -20,7 +21,7 @@ export function Edit({ handleModal }: EditProps) {
     updateTask,
     taskList
   } = useContext(ToDoContext)
-  const currentTask: TaskProps = JSON.parse(window.localStorage.getItem('currentTask') || '{}')
+  const currentTask: TaskProps = GetLocalStorageItem('currentTask') || '{}'
 
   function handleEditTask() {
     event!.preventDefault()

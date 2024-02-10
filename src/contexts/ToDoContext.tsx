@@ -13,6 +13,7 @@ import {
 } from "../components/Toasty"
 import { useAnalyticsEventTracker } from "../hooks/useAnalyticsEventTracker"
 import { dateFormatter } from "../utils/formatter"
+import { GetLocalStorageItem, SetLocalStorageItem } from "../utils/localStorage"
 
 interface ToDoContextProviderProps {
   children: ReactNode
@@ -44,14 +45,14 @@ interface Task {
 export const ToDoContext = createContext({} as ToDoContextProps)
 
 export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
-  const [taskList, setTaskList] = useState<Task[]>(JSON.parse(window.localStorage.getItem('taskList') || '[]'));
+  const [taskList, setTaskList] = useState<Task[]>(GetLocalStorageItem('taskList') || '[]');
   const [newTask, setNewTask] = useState('');
   const [updateTask, setUpdateTask] = useState('')
-  const [theme, setTheme] = useState<'default' | 'light'>(JSON.parse(window.localStorage.getItem('@taskList:theme') || '[]'))
+  const [theme, setTheme] = useState<'default' | 'light'>(GetLocalStorageItem('@taskList:theme') || 'default')
   const id = String(new Date().getTime())
 
   useEffect(() => {
-    window.localStorage.setItem('taskList', JSON.stringify(taskList))
+    SetLocalStorageItem('taskList', taskList)
   }, [taskList])
 
   function handleAddTask(event: FormEvent) {
@@ -136,7 +137,7 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
 
   function handleChangeTheme(theme: 'default' | 'light') {
     setTheme(theme)
-    window.localStorage.setItem('@taskList:theme', JSON.stringify(theme))
+    SetLocalStorageItem('@taskList:theme', theme)
   }
 
   return (

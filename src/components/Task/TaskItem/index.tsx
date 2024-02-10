@@ -4,6 +4,7 @@ import { Check, Info, Pencil, Trash } from 'phosphor-react'
 import { ToDoContext } from '../../../contexts/ToDoContext'
 import { TooltipHint } from '../../Tooltip'
 import { TaskControlsWrapper, TaskHandle, TaskItemContainer } from './styles'
+import { SetLocalStorageItem } from '../../../utils/localStorage'
 
 interface TaskItemProps {
   task: TaskProps
@@ -24,7 +25,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
   const { content, id, isTaskDone } = task
 
   function handleModal(type: 'edit' | 'remove' | 'details') {
-    window.localStorage.setItem('currentTask', JSON.stringify(task))
+    SetLocalStorageItem('currentTask', task)
     setSelectedOption(type)
   }
 
