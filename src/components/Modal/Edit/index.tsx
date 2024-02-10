@@ -5,7 +5,7 @@ import { ToDoContext } from '../../../contexts/ToDoContext'
 import { TaskProps } from '../../Task/TaskItem'
 import { useCopyToClipboard } from '../../../hooks/useCopyToClipboard'
 import { dateFormatter } from '../../../utils/formatter'
-import { errorDuplicateMessage, successCopiedMessage, successEditMessage } from '../../Toasty'
+import { errorDuplicateMessage, errorEmptyMessage, successCopiedMessage, successEditMessage } from '../../Toasty'
 import { ButtonCopy, Footer, Form, InputWrapper } from './styles'
 import { GetLocalStorageItem } from '../../../utils/localStorage'
 
@@ -26,10 +26,12 @@ export function Edit({ handleModal }: EditProps) {
   function handleEditTask() {
     event!.preventDefault()
 
-    const verifyContentExists = taskList.filter(task => task.content.trim().toLowerCase() === updateTask.trim().toLowerCase())
+    const verifyContentExists = taskList.some(task => task.content.trim().toLowerCase() === updateTask.trim().toLowerCase())
 
-    if (verifyContentExists.length >= 1) {
+    if (verifyContentExists) {
       errorDuplicateMessage()
+    } else if (updateTask.trim() === '') {
+      errorEmptyMessage()
     } else {
       const lastEditDate = dateFormatter.format(new Date())
       const taskListEditedUpdated = taskList.map(task => task.id === currentTask.id
