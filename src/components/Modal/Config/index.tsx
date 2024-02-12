@@ -1,6 +1,7 @@
 import { DialogClose } from "@radix-ui/react-dialog"
 import { Select } from "../../Select"
 import { Footer, ItemWrapper, Main } from "./styles"
+import { Switch } from "../../Switch"
 
 export function Config() {
   return (
@@ -14,6 +15,12 @@ export function Config() {
           <label>Tema</label>
 
           <Select />
+        </ItemWrapper>
+
+        <ItemWrapper>
+          <label>Reordenar automaticamente</label>
+
+          <Switch />
         </ItemWrapper>
       </Main>
 

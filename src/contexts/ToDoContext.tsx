@@ -27,10 +27,12 @@ interface ToDoContextProps {
   handleTaskDone: (id: string) => void
   handleRemoveTask: (id: string) => void
   handleChangeTheme: (theme: 'default' | 'light') => void
+  handleAutomaticReordering: (value: boolean) => void
   newTask: string
   updateTask: string
   taskList: Task[]
   theme: string
+  automaticReordering: boolean
 }
 
 interface Task {
@@ -49,7 +51,9 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
   const [newTask, setNewTask] = useState('');
   const [updateTask, setUpdateTask] = useState('')
   const [theme, setTheme] = useState<'default' | 'light'>(GetLocalStorageItem('@taskList:theme') || 'default')
+  const [automaticReordering, setAutomaticReordering] = useState(false)
   const id = String(new Date().getTime())
+  console.log({ taskList })
 
   useEffect(() => {
     SetLocalStorageItem('taskList', taskList)
@@ -58,7 +62,7 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
   function handleAddTask(event: FormEvent) {
     event.preventDefault()
     const date = dateFormatter.format(new Date())
-    const checkTaskExists = taskList.filter(task => task.content.trim() === newTask.trim()).length > 0
+    const checkTaskExists = taskList.some(task => task.content.trim() === newTask.trim())
 
     if (newTask.trim() !== '' && !checkTaskExists) {
       setTaskList((state) => ([
@@ -95,19 +99,23 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
   function handleTaskDone(id: string) {
     const date = dateFormatter.format(new Date())
 
-    const taskListDoneUpdated = taskList
-      .map(task => task.id === id
-        ? {
+    const taskListDoneUpdated = taskList.map(task => {
+      if (task.id === id) {
+        return {
           ...task,
           isTaskDone: !task.isTaskDone,
           doneAt: !task.isTaskDone ? date : undefined,
         }
-        : task)
+      }
+
+      return task
+    })
+
 
     const taskListSorted = taskListDoneUpdated.sort((a, b) => {
-      if (a.isTaskDone && !b.isTaskDone) {
+      if (automaticReordering && a.isTaskDone && !b.isTaskDone) {
         return 1
-      } else if (!a.isTaskDone && b.isTaskDone) {
+      } else if (automaticReordering && !a.isTaskDone && b.isTaskDone) {
         return -1
       } else {
         return Number(b.createdAt) - Number(a.createdAt)
@@ -140,6 +148,10 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
     SetLocalStorageItem('@taskList:theme', theme)
   }
 
+  function handleAutomaticReordering(value: boolean) {
+    setAutomaticReordering(value)
+  }
+
   return (
     <ToDoContext.Provider
       value={{
@@ -150,10 +162,12 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
         handleRemoveTask,
         handleUpdateTaskInput,
         handleUpdateTaskList,
+        handleAutomaticReordering,
         newTask,
         taskList,
         theme,
         updateTask,
+        automaticReordering,
       }}
     >
       {children}
