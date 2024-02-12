@@ -47,7 +47,7 @@ interface Task {
 export const ToDoContext = createContext({} as ToDoContextProps)
 
 export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
-  const [taskList, setTaskList] = useState<Task[]>(GetLocalStorageItem('@taskList') || '[]');
+  const [taskList, setTaskList] = useState<Task[]>(GetLocalStorageItem('@taskList') || []);
   const [newTask, setNewTask] = useState('');
   const [updateTask, setUpdateTask] = useState('')
   const [theme, setTheme] = useState<'default' | 'light'>(GetLocalStorageItem('@taskList:theme') || 'default')
@@ -55,7 +55,7 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
   const id = String(new Date().getTime())
 
   useEffect(() => {
-    SetLocalStorageItem('taskList', taskList)
+    SetLocalStorageItem('@taskList', taskList)
   }, [taskList])
 
   function handleAddTask(event: FormEvent) {
