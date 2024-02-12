@@ -51,9 +51,8 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
   const [newTask, setNewTask] = useState('');
   const [updateTask, setUpdateTask] = useState('')
   const [theme, setTheme] = useState<'default' | 'light'>(GetLocalStorageItem('@taskList:theme') || 'default')
-  const [automaticReordering, setAutomaticReordering] = useState(false)
+  const [automaticReordering, setAutomaticReordering] = useState(GetLocalStorageItem('@taskList:automaticReordering') || false)
   const id = String(new Date().getTime())
-  console.log({ taskList })
 
   useEffect(() => {
     SetLocalStorageItem('taskList', taskList)
@@ -150,6 +149,7 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
 
   function handleAutomaticReordering(value: boolean) {
     setAutomaticReordering(value)
+    SetLocalStorageItem('@taskList:automaticReordering', value)
   }
 
   return (
