@@ -20,12 +20,14 @@ export function TaskAdd() {
                         placeholder="Adicione uma nova tarefa"
                         onChange={(event) => handleNewTaskInput(event.target.value)}
                         value={newTask}
+                        data-cy="addInput"
                     />
 
                     <AddTaskButton
                         title="Adicione uma nova tarefa"
                         type="submit"
                         disabled={newTask.trim().length === 0}
+                        data-cy="createButton"
                     >
                         Criar
                         <PlusCircle width={20} height={20} color='#FFF' />

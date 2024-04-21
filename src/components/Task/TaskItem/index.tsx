@@ -36,7 +36,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
           {isTaskDone && <Check width={10} color='#FFF' weight='bold' />}
         </span>
 
-        <span className='taskContent'>
+        <span className='taskContent' data-cy="taskContent">
           {content}
         </span>
       </TaskHandle>

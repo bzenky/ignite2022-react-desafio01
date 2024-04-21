@@ -47,12 +47,17 @@ export function TaskList() {
             <TaskListHeader>
                 <span className='tasksCreated'>
                     Tarefas Criadas
-                    <span>{taskList.length}</span>
+                    <span data-cy="createdTasksCounter">
+                        {taskList.length}
+                    </span>
                 </span>
                 <span className='tasksDone'>
                     Concluídas
                     <span>
-                        {taskList.filter(task => task.isTaskDone).length} de {taskList.length}
+                        <span data-cy="doneTasksCounter">
+                            {taskList.filter(task => task.isTaskDone).length}
+                        </span>
+                        {' '} de {taskList.length}
                     </span>
                 </span>
             </TaskListHeader>
@@ -69,6 +74,7 @@ export function TaskList() {
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                     style={getListStyle(snapshot.isDraggingOver)}
+                                    data-cy="taskList"
                                 >
                                     <Dialog.Root
                                         open={open}
@@ -88,6 +94,7 @@ export function TaskList() {
                                                                 snapshot.isDragging,
                                                                 provided.draggableProps.style
                                                             )}
+                                                            data-cy="taskItem"
                                                         >
                                                             <TaskItem
                                                                 task={task}
