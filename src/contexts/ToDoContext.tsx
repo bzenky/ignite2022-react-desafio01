@@ -65,7 +65,12 @@ export function ToDoContextProvider({ children }: ToDoContextProviderProps) {
 
     if (newTask.trim() !== '' && !checkTaskExists) {
       setTaskList((state) => ([
-        { id, content: newTask, isTaskDone: false, createdAt: date },
+        {
+          id,
+          content: newTask.trim(),
+          isTaskDone: false,
+          createdAt: date
+        },
         ...state,
       ]))
       successAddMessage()
