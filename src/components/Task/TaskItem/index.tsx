@@ -44,7 +44,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
       <TaskControlsWrapper>
         <TooltipHint message={'Ver detalhes da tarefa'}>
           <Dialog.Trigger asChild>
-            <button onClick={() => handleModal('details')}>
+            <button onClick={() => handleModal('details')} data-cy="infoButton">
               <Info size={20} color='#808080' />
             </button>
           </Dialog.Trigger>
@@ -52,7 +52,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
 
         <TooltipHint message={'Editar tarefa'}>
           <Dialog.Trigger asChild>
-            <button onClick={() => handleModal('edit')}>
+            <button onClick={() => handleModal('edit')} data-cy="editButton">
               <Pencil width={20} color='#808080' />
             </button>
           </Dialog.Trigger>
@@ -60,7 +60,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
 
         <TooltipHint message={'Remover tarefa'}>
           <Dialog.Trigger asChild>
-            <button onClick={() => handleModal('remove')}>
+            <button onClick={() => handleModal('remove')} data-cy="deleteButton">
               <Trash width={20} color='#808080' />
             </button>
           </Dialog.Trigger>

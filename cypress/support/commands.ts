@@ -8,30 +8,16 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+Cypress.Commands.add('createTasks', () => {
+  const firstTask = 'Test Task 01'
+  const secondTask = 'Test Task 02'
+  const thirdTask = 'Test Task 03'
+
+  cy.get('[data-cy="addInput"]', { log: false })
+    .type(`${firstTask}{enter}`, { log: false })
+    .type(`${secondTask}{enter}`, { log: false })
+    .type(`${thirdTask}{enter}`, { log: false })
+
+  return cy.get('[data-cy="taskItem"]', { log: false })
+})

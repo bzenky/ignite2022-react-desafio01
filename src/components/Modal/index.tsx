@@ -33,6 +33,7 @@ export function Modal({ handleModal = () => { }, type }: EditModalProps) {
       <ModalContainer
         onOpenAutoFocus={(event) => event.preventDefault()}
         onCloseAutoFocus={(event) => event.preventDefault()}
+        data-cy="modal"
       >
         {ModalContent()}
       </ModalContainer>

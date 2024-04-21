@@ -54,7 +54,7 @@ export function Edit({ handleModal }: EditProps) {
 
   return (
     <>
-      <h2>
+      <h2 data-cy="editModalTitle">
         Atualize sua tarefa
       </h2>
 
@@ -70,6 +70,7 @@ export function Edit({ handleModal }: EditProps) {
             <ButtonCopy
               type="button"
               onClick={handleCopyTask}
+              data-cy="editCopyButton"
             >
               <CopySimple size={18} color='#D9D9D9' />
             </ButtonCopy>
@@ -82,6 +83,7 @@ export function Edit({ handleModal }: EditProps) {
             placeholder="Insira a atualização da descrição"
             onChange={(event) => handleUpdateTaskInput(event.target.value)}
             autoFocus
+            data-cy="editInput"
           />
         </InputWrapper>
 
@@ -90,6 +92,7 @@ export function Edit({ handleModal }: EditProps) {
             <button
               type="button"
               className='cancel'
+              data-cy="editCancelButton"
             >
               Cancelar
             </button>
@@ -98,6 +101,7 @@ export function Edit({ handleModal }: EditProps) {
           <button
             type="submit"
             className='submit'
+            data-cy="editSubmitButton"
           >
             Atualizar
           </button>
