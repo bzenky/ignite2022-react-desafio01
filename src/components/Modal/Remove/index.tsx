@@ -24,7 +24,7 @@ export function Remove({ handleModal }: RemoveProps) {
         Atenção
       </h2>
 
-      <Description>
+      <Description data-cy="deleteModalText">
         Você realmente deseja remover esta tarefa ?
       </Description>
 
@@ -33,6 +33,7 @@ export function Remove({ handleModal }: RemoveProps) {
           <button
             type="button"
             className='cancel'
+            data-cy="deleteCancelButton"
           >
             Cancelar
           </button>
@@ -42,6 +43,7 @@ export function Remove({ handleModal }: RemoveProps) {
           type="button"
           className='remove'
           onClick={handleRemoveTaskModal}
+          data-cy="deleteConfirmButton"
         >
           Remover
         </button>

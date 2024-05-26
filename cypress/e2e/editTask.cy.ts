@@ -26,7 +26,7 @@ describe('Create task flow', () => {
     cy.get('[data-cy="editButton"]').eq(0).click()
     cy.get('[data-cy="modal"]').type('{esc}');
 
-    cy.get('[data-cy="editModalTitle]"').should('not.exist')
+    cy.get('[data-cy="editModalTitle"]').should('not.exist')
   })
 
   it('should update task name', () => {
