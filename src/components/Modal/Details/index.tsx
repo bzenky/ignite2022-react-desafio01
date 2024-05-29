@@ -9,7 +9,7 @@ export function Details() {
 
   return (
     <>
-      <h2>
+      <h2 data-cy="detailsModalTitle">
         Detalhes da tarefa
       </h2>
 
@@ -35,6 +35,7 @@ export function Details() {
             <button
               type="button"
               className='cancel'
+              data-cy="detailsBackButton"
             >
               Voltar
             </button>

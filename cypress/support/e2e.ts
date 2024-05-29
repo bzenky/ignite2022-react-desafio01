@@ -16,5 +16,8 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+// This lib works only in the chromium-based browser
+import "cypress-real-events";
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

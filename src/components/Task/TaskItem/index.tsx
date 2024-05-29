@@ -31,7 +31,11 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
 
   return (
     <TaskItemContainer>
-      <TaskHandle className={`${isTaskDone && 'done'}`} onClick={() => handleTaskDone(id)}>
+      <TaskHandle
+        className={`${isTaskDone && 'done'}`}
+        onClick={() => handleTaskDone(id)}
+        data-cy="handleTaskDone"
+      >
         <span className='radioTask'>
           {isTaskDone && <Check width={10} color='#FFF' weight='bold' />}
         </span>
@@ -44,7 +48,7 @@ export function TaskItem({ task, setSelectedOption }: TaskItemProps) {
       <TaskControlsWrapper>
         <TooltipHint message={'Ver detalhes da tarefa'}>
           <Dialog.Trigger asChild>
-            <button onClick={() => handleModal('details')} data-cy="infoButton">
+            <button onClick={() => handleModal('details')} data-cy="detailsButton">
               <Info size={20} color='#808080' />
             </button>
           </Dialog.Trigger>

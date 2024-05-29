@@ -12,11 +12,11 @@ export function TooltipHint({ children, message }: TooltipProps) {
     return (
         <Tooltip.Provider>
             <Tooltip.Root>
-                <Tooltip.Trigger asChild>
+                <Tooltip.Trigger asChild >
                     {children}
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
-                    <Content>
+                    <Content data-cy='popover'>
                         {typeof message === 'string'
                             ? message
                             : message.map(eachMessage => <span key={uuid()}>{eachMessage}</span>)
