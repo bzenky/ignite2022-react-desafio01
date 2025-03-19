@@ -1,1 +1,1 @@
-export const dateFormatter = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'full', timeStyle: 'short' })
+export const dateFormatter = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' })

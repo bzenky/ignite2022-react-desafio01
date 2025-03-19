@@ -12,11 +12,9 @@ export function Details() {
       <h2 data-cy="detailsModalTitle">Detalhes da tarefa</h2>
 
       <DetailsWrapper>
-        <span>Criada em {createdAt}</span>
-
-        {editedAt && <span>Última edição em {editedAt}</span>}
-
-        {doneAt && <span>Concluída em {doneAt}</span>}
+        <span>Criada: {createdAt}</span>
+        <span>Última edição: {editedAt || '-'}</span>
+        <span>Concluída: {doneAt || '-'}</span>
 
         <ButtonWrapper>
           <DialogClose asChild>
